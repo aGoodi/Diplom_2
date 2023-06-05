@@ -19,7 +19,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+          ref: ${{ github.ref }}
+          
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
@@ -37,7 +41,7 @@ jobs:
       run: mvn allure:report
       
     - name: Get Allure history
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       if: always()
       continue-on-error: true
       with:
